@@ -1,0 +1,42 @@
+
+{% if error %}
+{{ error }}
+
+<br/>
+<br/>
+{% endif %}
+
+<h1>Signup!</h1>
+
+<form method = "POST" action="{% url 'societyapp:signup' %}">
+    {% csrf_token %}
+    email:
+    <br/>
+    <input type="text" name="email" />
+    <br/>
+    Password:
+    <br/>
+    <input type="password" name="password1" />
+    <br/>
+    confirm Password:
+    <br/>
+    <input type="text" name="password2" />
+    <br/>
+    Tower No:
+    <br/>
+    <input type="text" name="tower_no" />
+    <br/>
+    Mobile No:
+    <br/>
+    <input type="text" name="mobile_no" />
+    <br/>
+    Flat No:
+    <br/>
+    <input type="number" name="flat_no" />
+    <br/>
+    <input class ="btn btn-primary" type="submit" value= "signup" />
+    <br/>
+
+
+
+</form>

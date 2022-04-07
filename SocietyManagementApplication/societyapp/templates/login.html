@@ -1,0 +1,28 @@
+{% if error %}
+{{ error }}
+
+<br/>
+<br/>
+{% endif %}
+
+<h1>Login!</h1>
+
+<form method = "POST" >
+    {% csrf_token %}
+    username:
+    <br/>
+    <input type="text" name="username" />
+    <br/>
+    Password:
+    <br/>
+    <input type="password" name="password" />
+    <br/>
+    <input class ="btn btn-primary" type="submit" value= "Login" />
+    <br/>
+
+
+
+</form>
+<div class="container mt-5">
+    <a href="pages/signup" class="btn btn-primary btn-sm">Want To Register?</a>
+</div>
