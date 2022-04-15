@@ -1,4 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Society Management Application</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Society Management</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{% url 'societyapp:dashboard' %}">Home</a></li>
+         {% if user.is_authenticated %}
+      <li><a href="#">User Profile</a></li>
+        <li><a href="{% url 'societyapp:logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'societyapp:login' %}">Login</a></li>
+        <li><a href="{% url 'societyapp:signup' %}">Signup</a></li>
+        {% endif %}
+        <li>  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></li>
+        <li><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></li>
+    </ul>
+  </div>
+</nav>
 {% if error %}
 {{ error }}
 
@@ -6,37 +35,49 @@
 <br/>
 {% endif %}
 
-<h1>Signup!</h1>
 
+<div class="container mt-5 ">
+    <h1>Signup!</h1>
 <form method = "POST" action="{% url 'societyapp:signup' %}">
+    <div class="form-group">
     {% csrf_token %}
     email:
     <br/>
-    <input type="text" name="email" />
+    <input type="text" name="email" required/>
+    <br/>
+        First Name:
+    <br/>
+    <input type="text" name="fname" required/>
+    <br/>
+        Last Name:
+    <br/>
+    <input type="text" name="lname" required/>
     <br/>
     Password:
     <br/>
-    <input type="password" name="password1" />
+    <input type="password" name="password1" required/>
     <br/>
     confirm Password:
     <br/>
-    <input type="text" name="password2" />
+    <input type="text" name="password2" required/>
     <br/>
     Tower No:
     <br/>
-    <input type="text" name="tower_no" />
+    <input type="text" name="tower_no" required/>
     <br/>
     Mobile No:
     <br/>
-    <input type="text" name="mobile_no" />
+    <input type="text" name="mobile_no"  required/>
     <br/>
     Flat No:
     <br/>
-    <input type="number" name="flat_no" />
+    <input type="number" name="flat_no" required/>
     <br/>
     <input class ="btn btn-primary" type="submit" value= "signup" />
     <br/>
 
-
+</div>
 
 </form>
+</div>
+</html>

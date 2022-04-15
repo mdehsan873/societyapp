@@ -1,4 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Society Management Application</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Society Management</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{% url 'societyapp:dashboard' %}">Home</a></li>
+         {% if user.is_authenticated %}
+      <li><a href="#">User Profile</a></li>
+        <li><a href="{% url 'societyapp:logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'societyapp:login' %}">Login</a></li>
+        <li><a href="{% url 'societyapp:signup' %}">Signup</a></li>
+        {% endif %}
+        <li>  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></li>
+        <li><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></li>
+    </ul>
+  </div>
+</nav>
 
     <section class="text-gray-500 body-font">
         <div class="container px-10 py-24 mx-auto flex flex-wrap items-center">
@@ -30,6 +59,7 @@
                                     type="submit">
                                 Submit
                             </button>
+                            <a href="{% url 'societyapp:otp' %}" class="btn btn-info" role="button">Resend OTP</a>
                         </div>
                         <br>
                     </form>
@@ -37,4 +67,6 @@
                 </div>
             </div>
         </div>
+
     </section>
+</html>>
