@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <title>Society Management Application</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+body{
+  font-family: Montserrat, sans-serif;
+  background: #28223f;
+}
+.container{
+  user-select: none;
+  margin: 100px auto;
+  background: #231e39;
+  color: #b3b8cd;
+  border-radius: 5px;
+  width: 100%;
+  height:80%;
+  text-align: center;
+  box-shadow: 0 10px 20px -10px rgba(0,0,0,.75);
+}
+.cover-photo{
+  background: url(https://images.unsplash.com/photo-1540228232483-1b64a7024923?ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80);
+  height: 160px;
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+}
+.profile{
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  margin: 93px 0 0 -175px;
+  border: 1px solid #1f1a32;
+  padding: 7px;
+  background: #292343;
+}
+.profile-name{
+  font-size: 25px;
+  font-weight: bold;
+  margin: 27px 0 0 120px;
+}
+.about{
+  margin-top: 35px;
+  line-height: 21px;
+}
+button{
+  margin: 10px 0 40px 0;
+}
+.msg-btn, .follow-btn{
+  background: #03bfbc;
+  border: 1px solid #03bfbc;
+  padding: 10px 25px;
+  color: #231e39;
+  border-radius: 3px;
+  font-family: Montserrat, sans-serif;
+  cursor: pointer;
+}
+.follow-btn{
+  margin-left: 10px;
+  background: transparent;
+  color: #02899c;
+}
+.follow-btn:hover{
+  color: #231e39;
+  background: #03bfbc;
+  transition: .5s;
+}
+.container i{
+
+  font-size: 20px;
+
+  cursor: pointer;
+  transition: .5s;
+}
+.container i:hover{
+  color: #03bfbc;
+}
+
+</style>
+</head>
+<nav class="navbar navbar-expand-sm bg-dark ">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Society Management</a>
+    </li>
+
+      <li class="nav-link"><a href="{% url 'societyapp:dashboard' %}">   Home     </a></li>
+         {% if user.is_authenticated %}
+      <li class="nav-link"><a href="{% url 'societyapp:userprofile' %}">User Profile</a></li>
+        <li class="nav-link"><a href="{% url 'societyapp:logout' %}">  Logout   </a></li>
+      <li class="nav-link"><a href="{% url 'societyapp:addvisitor' %}"> Add visitor   </a></li>
+       <li class="nav-link"><a href="{% url 'societyapp:br_board' %}"> Buy Rent Board   </a></li>
+        {% else %}
+        <li class="nav-link"><a href="{% url 'societyapp:login' %}">     Login  </a></li>
+        <li class="nav-link"><a href="{% url 'societyapp:signup' %}">    Signup   </a></li>
+        {% endif %}
+        <li class="nav-link">  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></li>
+        <li class="nav-link"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">  Search   </button></li>
+    </ul>
+  </div>
+</nav>
+      <div class="container">
+      <div class="cover-photo">
+        <img src="https://images.unsplash.com/photo-1565464027194-7957a2295fb7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" class="profile">
+      </div>
+      <div class="profile-name">{{user.first_name}}{{user.last_name}}</div>
+      <p class="about">Mobile No: {{user.mobile_no}}<br>Email: {{user.email}}<br>Flat No : {{user.flat_no}}<br>Tower No :{{user.tower_no}}</p>
+
+
+    </div>
+</html>

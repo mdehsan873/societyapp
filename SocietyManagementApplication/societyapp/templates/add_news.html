@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="container mt-5 ">
+    <h1>Add News</h1>
+<form method = "POST" action="{% url 'societyapp:addnews' %}">
+    <div class="form-group">
+    {% csrf_token %}
+    NEWS TITLE:
+    <br/>
+    <input type="text" name="title" required/>
+    <br/>
+    NEWS:
+    <br/>
+    <input type="title" name="news" required/>
+    <br/>
+    <input class ="btn btn-primary" type="submit" value= "signup" />
+    <br/>
+
+</div>
+
+</form>
+</div>
+</html>

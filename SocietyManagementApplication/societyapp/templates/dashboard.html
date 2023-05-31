@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Society Management Application</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+.site-footer
+{
+  background-color:#26272b;
+  padding:45px 0 20px;
+  font-size:15px;
+  line-height:24px;
+  color:#737373;
+}
+.site-footer hr
+{
+  border-top-color:#bbb;
+  opacity:0.5
+}
+.site-footer hr.small
+{
+  margin:20px 0
+}
+.site-footer h6
+{
+  color:#fff;
+  font-size:16px;
+  text-transform:uppercase;
+  margin-top:5px;
+  letter-spacing:2px
+}
+.site-footer a
+{
+  color:#737373;
+}
+.site-footer a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links
+{
+  padding-left:0;
+  list-style:none
+}
+.footer-links li
+{
+  display:block
+}
+.footer-links a
+{
+  color:#737373
+}
+.footer-links a:active,.footer-links a:focus,.footer-links a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links.inline li
+{
+  display:inline-block
+}
+.site-footer .social-icons
+{
+  text-align:right
+}
+.site-footer .social-icons a
+{
+  width:40px;
+  height:40px;
+  line-height:40px;
+  margin-left:6px;
+  margin-right:0;
+  border-radius:100%;
+  background-color:#33353d
+}
+.copyright-text
+{
+  margin:0
+}
+@media (max-width:991px)
+{
+  .site-footer [class^=col-]
+  {
+    margin-bottom:30px
+  }
+}
+@media (max-width:767px)
+{
+  .site-footer
+  {
+    padding-bottom:0
+  }
+  .site-footer .copyright-text,.site-footer .social-icons
+  {
+    text-align:center
+  }
+}
+.social-icons
+{
+  padding-left:0;
+  margin-bottom:0;
+  list-style:none
+}
+.social-icons li
+{
+  display:inline-block;
+  margin-bottom:4px
+}
+.social-icons li.title
+{
+  margin-right:15px;
+  text-transform:uppercase;
+  color:#96a2b2;
+  font-weight:700;
+  font-size:13px
+}
+.social-icons a{
+  background-color:#eceeef;
+  color:#818a91;
+  font-size:16px;
+  display:inline-block;
+  line-height:44px;
+  width:44px;
+  height:44px;
+  text-align:center;
+  margin-right:8px;
+  border-radius:100%;
+  -webkit-transition:all .2s linear;
+  -o-transition:all .2s linear;
+  transition:all .2s linear
+}
+.social-icons a:active,.social-icons a:focus,.social-icons a:hover
+{
+  color:#fff;
+  background-color:#29aafe
+}
+.social-icons.size-sm a
+{
+  line-height:34px;
+  height:34px;
+  width:34px;
+  font-size:14px
+}
+.social-icons a.facebook:hover
+{
+  background-color:#3b5998
+}
+.social-icons a.twitter:hover
+{
+  background-color:#00aced
+}
+.social-icons a.linkedin:hover
+{
+  background-color:#007bb6
+}
+.social-icons a.dribbble:hover
+{
+  background-color:#ea4c89
+}
+@media (max-width:767px)
+{
+  .social-icons li.title
+  {
+    display:block;
+    margin-right:0;
+    font-weight:600
+  }
+}
+.main-container {
+      overflow: scroll;
+
+      }
+
+
+.visitorcard {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+  margin-top:10px;
+  background-color: white;
+}
+
+.visitorcard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.visitorcontainer {
+  padding: 2px 16px;
+
+}
+{
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.body{
+background-color: white;
+}
+.page{
+flex:1;
+                background-color: white;
+                overflow: auto;
+                scroll-behavior: smooth;
+                 height: 100vh;
+}
+.footer {
+   background-color: white;
+  position: absolute;
+  margin-top: 300px;
+  width: 100%;
+  color: black;
+  text-align: center;
+}
+.section {
+   background-color: white;
+   position: absolute;
+
+  margin-top: 700px;
+  width: 100%;
+
+
+}
+.authsection {
+   background-color: white;
+   position: absolute;
+  left: 0;
+  bottom: 100px;
+  width: 100%;
+  color: blue;
+  text-align: center;
+}
+.my-before-footer-content {
+   background-color: white;
+  position: absolute;
+  width: 100%;
+  color: blue;
+   margin-top: 1020px;
+  text-align: center;
+}
+
+
+div.news {
+   background-color: white;
+  position: absolute;
+  left: auto;
+  width: 100%;
+  height: 400px;
+
+   text-align: center;
+    overflow: scroll;
+}
+div.news::-webkit-scrollbar{
+display : none;
+}
+
+div.visitors{
+   background-color: white;
+  position: absolute;
+margin-right:10px;
+  width: 100%;
+   margin-top: 400px;
+  height: 250px;
+
+   text-align: center;
+    overflow: scroll;
+}
+div.facilities{
+   background-color: white;
+  position: absolute;
+ margin-top: 400px;
+ margin-left: 50px;
+  width: 100%;
+  height: 200px;
+}
+.cards {
+ text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 300px;
+  height : 250px;
+  background-color:#7DCEA0;
+   border-radius: 5px 5px 0 0;
+
+}
+.card1{
+ margin-left: 50px;
+ margin-right: 20px;
+}
+.cards:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.newscards {
+ text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+  height : 300px;
+  margin-top:20px;
+  margin-bottom:20px;
+  margin-left:10px;
+  margin-right:10px;
+     background-color: white;
+   border-radius: 5px 5px 0 0;
+
+}
+.newscard1{
+ margin-left: 50px;
+ margin-right: 20px;
+}
+.newscards:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.visitorcards:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.cardcontainer {
+  padding: 2px 16px;
+  background-color:##7DCEA0;
+}
+
+html {
+   background-color: white;
+  scroll-behavior: smooth;
+}
+</style>
+<nav class="navbar navbar-expand-sm bg-dark ">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Society Management</a>
+    </li>
+
+      <li class="nav-link"><a href="{% url 'societyapp:dashboard' %}">   Home     </a></li>
+         {% if user.is_authenticated %}
+      <li class="nav-link"><a href="{% url 'societyapp:userprofile' %}">User Profile</a></li>
+        <li class="nav-link"><a href="{% url 'societyapp:logout' %}">  Logout   </a></li>
+      <li class="nav-link"><a href="{% url 'societyapp:addvisitor' %}"> Add visitor   </a></li>
+       <li class="nav-link"><a href="{% url 'societyapp:br_board' %}"> Buy Rent Board   </a></li>
+        {% else %}
+        <li class="nav-link"><a href="{% url 'societyapp:login' %}">     Login  </a></li>
+        <li class="nav-link"><a href="{% url 'societyapp:signup' %}">    Signup   </a></li>
+        {% endif %}
+        <li class="nav-link">  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></li>
+        <li class="nav-link"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">  Search   </button></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page">
+
+
+
+
+  <div class="my-before-footer-content">
+      <h1> <span class="badge badge-primary"><strong><center>Complains and Suggestions</center></strong></span></h1>
+      {% if complain %}
+    {{complain }}
+    {% endif %}
+<form class="form" method="POST" action="{% url 'societyapp:dashboard' %}">
+     {% csrf_token %}
+
+  <textarea id="fullname" name="name" placeholder="Full Name" style="width: 800px;"></textarea>
+ <textarea id="compain" name="complain" placeholder="Write Complain and Query" style="width: 800px;"></textarea>
+    </br>
+    <input type="submit" value="Submit">
+  </form>
+  </div>
+     {% if not user.is_authenticated %}
+  <div class="facilities" >
+
+<h1><strong><center>Society's Flats on Rent or Buy and other Facilities</center></strong></h1>
+
+    <div class="row">
+
+        <div class="col-lg-4 my-4">
+            <div class="card shadow" style="width: 20rem; height: 11rem;">
+                <div class="card-body" style= "background-color: #edcccc;">
+                    <h4 class="card-title"><center><strong>Rent</strong></center></h4>
+                    <ul>
+                        <li>1 BHK For 10,000&#8377</li>
+                        <li>2 BHK For 15,000&#8377</li>
+                        <li>3 BHK For 20,000&#8377</li>
+                    </ul>
+                    <form method = "POST" action="{% url 'societyapp:rent' %}">
+                            {% csrf_token %}
+
+                        <input type="text" style="display:none;" name="type" required value="Rent"/>
+                        <input type="submit" style = "position:relative;  bottom:10px; left:60px;"value="Want to rent?"/>
+                    </form>
+                </div>
+              </div>
+        </div>
+
+        <div class="col-lg-4 my-4">
+            <div class="card shadow" style="width: 20rem; height: 11rem;">
+                <div class="card-body"style= "background-color: #edcccc;">
+                  <h4 class="card-title"><center><strong> Buy </strong></center></h4>
+                    <ul>
+                        <li>1 BHK For 20,00,000&#8377</li>
+                        <li>2 BHK For 25,00,000&#8377</li>
+                        <li>3 BHK For 30,00,000&#8377</li>
+                    </ul>
+                    <form method = "POST" action="{% url 'societyapp:rent' %}">
+                            {% csrf_token %}
+
+                        <input type="text" style="display:none;" name="type" required value="Buy"/>
+                        <input type="submit" style = "position:relative;  bottom:10px; left:80px; "value="Want to buy"/>
+                    </form>
+                </div>
+              </div>
+        </div>
+
+        <div class="col-lg-4 my-4">
+            <div class="card shadow" style="width: 20rem; height: 11rem;">
+                <div class="card-body"style= "background-color: #edcccc;">
+                    <h4 class="card-title"><center><strong> Facilities </strong></center></h4>
+                    <ul>
+                        <li>Swimming Pool</li>
+                        <li>Aerobics and Gym Center</li>
+                        <li>Creche & etc.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+    {% endif %}
+
+<div class="news">
+    <h1 ><span class="badge badge-primary">Recent News</span></h1>
+<!--<div class="Newses">-->
+<div class="main-container" style=" width: 100vw; height: 19rem; padding: 0.5rem; bottom: 0.5rem;">
+<div class="container-fluid" style='color: #000000;'>
+
+    <div class="row flex-row flex-nowrap" >
+         {% for news in newss  %}
+        <div class="cardcontainer">
+            <div class="card bg-info text-white mb-3" style = 'width:300px; height:250px;overflow: hidden '><h1>{{ news.title }}</h1>
+            <p>Date {{news.date}}</p>
+            <p>{{news.containt}}</p></div>
+        </div>
+
+
+    {% endfor %}
+
+<!--</div>-->
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+{% if user.is_authenticated %}
+<div class="visitors">
+  <h1 ><span class="badge badge-primary">VISITORS</span></h1>
+<center>
+<div class="visitor">
+    <table class="table align-middle mb-0 bg-white" style="width:100%">
+        <thead class="bg-light">
+        <tr>
+            <th style="margin-left:20px;">SR</th>
+            <th>Name</th>
+
+            <th>Mobile No</th>
+            <th>Message</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for u in visitors %}
+        <tr>
+            <td>
+                <div class="d-flex align-items-center">
+
+                    <div class="ms-3">
+                        <p class="fw-bold mb-1">{{ forloop.counter }}</p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <p class="fw-normal mb-1">{{ u.name  }} </p>
+
+            </td>
+
+
+            <td>
+                {{ u.mobile }}
+            </td>
+            <td>{{ u.message }}</td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</center>
+</div>
+    {% endif  %}
+
+  <section class="section">
+    <div class="container">
+      <!-- Grid row -->
+      <div class="row">
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="card1">
+          <!-- Links -->
+          <div class="cards">
+        <h6 style="">Some Useful Links</h6>
+        <div class="cardcontainer">
+          <p>
+            <a href="{% url 'societyapp:reslist' %}" class="text-reset">Resident List</a>
+          </p>
+          <p>
+            <a href="{% url 'societyapp:maint' %}" class="text-reset">Emergency Number</a>
+          </p>
+          <p>
+            <a href="{% url 'societyapp:maint' %}" class="text-reset">Daily Help</a>
+          </p>
+          <p>
+            <a href="{% url 'societyapp:maint' %}" class="text-reset">Documents</a>
+          </p>
+          <p>
+            <a href="{% url 'societyapp:maint' %}" class="text-reset">communication</a>
+          </p>
+        </div>
+              </div>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="card1">
+          <!-- Links -->
+            <div class="cards">
+
+        <div class="cardcontainer">
+          <h2 >
+            Home Services
+          </h2>
+          <p>
+            <a href="{% url 'societyapp:maint' %}" class="text-reset">Ac Service</a>
+          </p>
+          <p>
+            <a href="{% url 'societyapp:maint' %}" class="text-reset">Home Service</a>
+          </p>
+          <p>
+            <a href="{% url 'societyapp:maint' %}" class="text-reset">Pest control</a>
+          </p>
+          <p>
+            <a href="{% url 'societyapp:maint' %}" class="text-reset"> Groceries</a>
+          </p>
+        </div>
+    </div>
+            </div>
+
+        <!-- Grid column -->
+        <div class="card1">
+        <div class="cards">
+
+        <div class="cardcontainer">
+          <h2>
+            Payment
+          </h2>
+
+          <p><a href="#!" class="text-reset">Society Charges</a></p>
+          <p>
+            <a href="#!" class="text-reset"> Utility Payments</a>
+
+
+          </p>
+          <p><a href="#!" class="text-reset">Rent Payment</a></p>
+
+        </div>
+        </div>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+
+
+  <!-- Section: Links  -->
+  </div>
+</body>
+  <!-- Copyright -->
+  <div class="footer" style="background-color:#26272b;  color:#fff;">
+    <h1> Contact Us</h1>
+    <p>Secretary : Mohammad Ehsan </p>
+      <p>Mobile Number : 9999888877</p>
+      <p> Address : Manda Road Allahabad Uttar Pradesh</p>
+
+  </div>
+
+  <!-- Copyright -->
+
+<!-- Footer -->
+
+
+
+</html>

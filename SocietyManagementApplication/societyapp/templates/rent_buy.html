@@ -1,0 +1,250 @@
+<!--
+  ****************************************
+  Contest Entry for Treehouse:
+  "Design a Contact Form"
+  Submitted by Lisa Wagner
+  ****************************************
+-->
+<style>
+label.fac{
+margin-top:100px;
+}
+html{
+   background:url(https://cdn.pixabay.com/photo/2016/11/18/17/46/house-1836070_960_720.jpg) no-repeat;
+   background-size: cover;
+   height:100%;
+   background-color: #000;
+}
+* {
+   box-sizing:border-box;
+   -webkit-box-sizing:border-box;
+   -moz-box-sizing:border-box;
+   -webkit-font-smoothing:antialiased;
+   -moz-font-smoothing:antialiased;
+   -o-font-smoothing:antialiased;
+   font-smoothing:antialiased;
+   text-rendering:optimizeLegibility;
+}
+body {
+   color: #C0C0C0;
+   font-family: Arial, san-serif;
+}
+
+
+/* Contact Form Styles */
+h1 {
+   margin: 10px 0 0 0;
+}
+h4{
+   margin: 0 0 20px 0;
+}
+#contact-form {
+   background-color:rgba(72,72,72,0.9);
+   padding: 10px 20px 30px 20px;
+   max-width:100%;
+   float: left;
+   left: 50%;
+   position: absolute;
+   margin-top:30px;
+   margin-left: -260px;
+   border-radius:7px;
+   -webkit-border-radius:7px;
+   -moz-border-radius:7px;
+}
+#contact-form input,
+#contact-form select,
+#contact-form textarea,
+#contact-form label {
+   font-size: 15px;
+   margin-bottom: 2px;
+   font-family: Arial, san-serif;
+}
+#contact-form input,
+#contact-form select,
+#contact-form textarea {
+   width:100%;
+   background: #fff;
+   border: 0;
+   -moz-border-radius: 4px;
+   -webkit-border-radius: 4px;
+   border-radius: 4px;
+   margin-bottom: 25px;
+   padding: 5px;
+}
+#contact-form input:focus,
+#contact-form select:focus,
+#contact-form textarea:focus {
+   background-color: #E5E6E7;
+}
+#contact-form textarea {
+   width:100%;
+   height: 150px;
+}
+#contact-form button[type="submit"] {
+   cursor:pointer;
+   width:100%;
+   border:none;
+   background:#991D57;
+   background-image:linear-gradient(bottom, #8C1C50 0%, #991D57 52%);
+   background-image:-moz-linear-gradient(bottom, #8C1C50 0%, #991D57 52%);
+   background-image:-webkit-linear-gradient(bottom, #8C1C50 0%, #991D57 52%);
+   color:#FFF;
+   margin:0 0 5px;
+   padding:10px;
+   border-radius:5px;
+}
+#contact-form button[type="submit"]:hover {
+   background-image:linear-gradient(bottom, #9C215A 0%, #A82767 52%);
+   background-image:-moz-linear-gradient(bottom, #9C215A 0%, #A82767 52%);
+   background-image:-webkit-linear-gradient(bottom, #9C215A 0%, #A82767 52%);
+   -webkit-transition:background 0.3s ease-in-out;
+   -moz-transition:background 0.3s ease-in-out;
+   transition:background-color 0.3s ease-in-out;
+}
+#contact-form button[type="submit"]:active {
+   box-shadow:inset 0 1px 3px rgba(0,0,0,0.5);
+}
+input:required, textarea:required {
+   box-shadow: none;
+   -moz-box-shadow: none;
+   -webkit-box-shadow: none;
+   -o-box-shadow: none;
+}
+#contact-form .required {
+   font-weight:bold;
+   color: #E5E6E7;
+}
+
+/* Hide success/failure message
+   (especially since the php is missing) */
+#failure, #success {
+   color: #6EA070;
+   display:none;
+}
+
+/* Make form look nice on smaller screens */
+@media only screen and (max-width: 580px) {
+   #contact-form{
+      left: 3%;
+      margin-right: 3%;
+      width: 100%;
+      margin-left: 0;
+      padding-left: 3%;
+      padding-right: 3%;
+   }
+}
+</style>
+
+<div id="contact-form">
+
+  <div>
+
+    <h1>Nice to Meet You!</h1>
+
+
+
+    <h4>                Please Enter your requierment                      </h4>
+  </div>
+
+         {% if messages %}
+      <h4>                {{ messages }}                   </h4>
+        {% else %}
+
+       <form method="POST" action="{% url 'societyapp:rent' %}">
+          {% csrf_token %}
+      <div>
+          <label for="name">
+            <span class="required">Name: *</span>
+            <input type="text" id="name" name="name" value="" placeholder="Your Name" required="required" tabindex="1" autofocus="autofocus" />
+          </label>
+      </div>
+      <div>
+          <label for="email">
+            <span class="required">Email: *</span>
+            <input type="email" id="email" name="email" value="" placeholder="Your Email" tabindex="2" required="required" />
+          </label>
+      </div>
+           <div>
+          <label for="mobile">
+            <span class="required">Mobile Number</span>
+            <input type="number" id="mobile" name="mobile" value="" placeholder="Your Mobile Number" tabindex="2" required="required" />
+          </label>
+      </div>
+             <div>
+          <label for="members">
+            <span class="required">Number Of Members</span>
+            <input type="number" id="members" name="members" value="" placeholder="Number Of Member" tabindex="2" required="required" min="1" />
+          </label>
+      </div>
+           {% if types == 'Rent' %}
+      <div>
+          <label for="subject">
+          <span>House type</span>
+            <select id="amnt" name="amnt" tabindex="4">
+               <option value="10,000:1 BHK">1 BHK Price 10,000</option>
+               <option value="15,000:2 BHK">2 BHK Price 15,000</option>
+               <option value="20,000:3 BHk">3 BHK Price 20,000</option>
+            </select>
+          </label>
+      </div>
+           {% elif  types == 'Buy' %}
+            <div>
+          <label for="amnt">
+          <span>House type</span>
+            <select id="amnt" name="amnt" tabindex="4">
+               <option value="20,00,000: 1BHK">1 BHK Price 20,00,000</option>
+               <option value="25,00,000:2 BHK">2 BHK Price 25,00,000</option>
+               <option value="30,00,000:3 BHK">3BHK Price 30,00,000</option>
+            </select>
+          </label>
+      </div>
+           <div>
+          <label for="bank">
+          <span>Payment Type</span>
+            <select id="bank" name="bank" tabindex="4">
+               <option value="cash">Cash</option>
+               <option value="EMI 8%PA HDFC BANK ">EMI 8%PA HDFC BANK </option>
+               <option value="EMI 8%PA HDFC BANK ">EMI 10%PA AXIS BANK</option>
+                <option value="EMI 8%PA HDFC BANK ">EMI 6%PA SBI BANK </option>
+               <option value="EMI 8%PA HDFC BANK ">EMI 14%PA ICICI BANK</option>
+            </select>
+          </label>
+      </div>
+           {%  endif %}
+           <div>
+          <label for="furnished">Furnished?</label>
+
+           <input type="checkbox" style = "position:relative;  bottom:15px; right:90px" id="furnished" name="furnished" value="Yes">
+
+      </div>
+     <div style="display: inline-block;">
+          <label for="fac">
+          <h1>House Facilities</h1>
+
+  <label class="fac"  for="fac1" >Swimming Pool</label>
+               <input type="checkbox"  id="fac1" style = "position:relative;  bottom:15px; right:20px" name="fac1" value="Swimming Pool">
+
+  <label class="fac"   for="fac2"> Car Parking</label>
+                <input type="checkbox"style = "position:relative;  bottom:15px; right:20px" id="fac2" name="fac2" value="Car Parking">
+
+  <label class="fac"   for="fac3">Balcony</label>
+                <input type="checkbox" style = "position:relative;  bottom:15px; right:20px" id="fac3" name="fac3" value="Car Parking">
+          </label>
+     </div>
+      <div>
+          <label for="message">
+            <span class="required">Message: *</span>
+            <textarea id="message" name="message" placeholder="Please write your message here." tabindex="5" required="required"></textarea>
+          </label>
+      </div>
+      <div>
+
+          {% if types %}
+          <button name="submit" type="submit" id="submits" >{{types}}</button>
+          {% else %}
+          <button name="submit" type="submit" id="submit" >None</button>
+          {% endif %}
+      </div>
+       </form>
+    {% endif %}
+  </div>
