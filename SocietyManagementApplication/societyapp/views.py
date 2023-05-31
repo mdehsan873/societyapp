@@ -1,33 +1,63 @@
 import datetime
 import time
-
+from .tasks import send_verification_email
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from django.views.decorators.csrf import requires_csrf_token
+
 from .form import UserCreationForm
-from .models import User, OTPLog, News, Visitor, Buy
+from .models import User, OTPLog, News, Visitor, Buy, Complain
 from .email import email_message
 from django.contrib import auth
 from django.core.mail import send_mail
 import math, random
 
 
+def setpassword(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        try:
+            user = User.objects.get(email=email)
+            user.set_password(request.POST.get('password'))
+            user.save()
+            print(request.POST.get('password'))
+            return redirect('societyapp:login')
+        except User.DoesNotExist:
+            error = 'User Does Not Exist Please enter valid email Thank You'
+            return render(request, 'setpassword.html', {'error': error})
+    return render(request, 'setpassword.html')
+
+
+def resetpassword(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        try:
+            User.objects.get(email=email)
+            send_verification_email.delay(email, 'Reset Link', 'http://127.0.0.1:8000/setpassword')
+            error = 'Please Check You Email'
+            return render(request, 'reset.html', {'error': error})
+        except User.DoesNotExist:
+            error = 'Please enter valid email Thank You'
+            return render(request, 'reset.html', {'error': error})
+    return render(request, 'reset.html')
+
+@requires_csrf_token
 def login_view(request):
     context = {
         'title': 'Sign In'
     }
     error = ''
     if request.method == "POST":
-        print('hi')
         email = request.POST.get('email')
+
         password = request.POST.get('password')
         print(email, password)
-        user = authenticate(request, email=email, password=password)
-
+        user = authenticate(request, username=email,password=password)
+        print(user)
         if user is not None:
-
             login(request, user)
             return redirect("societyapp:dashboard")
         else:
@@ -40,11 +70,12 @@ def generateOTP():
     OTP = ""
     for i in range(4):
         OTP += digits[math.floor(random.random() * 10)]
+    print(OTP)
     return OTP
 
 
 def reg_otp_view(request):
-    email_message(request.session['email'], 'Registration OTP', request.session['message'])
+    send_verification_email.delay(request.session['email'], 'Registration OTP', request.session['message'])
     print('Hi i am', request.session['email'])
     context = {
         'title': 'OTP Verification',
@@ -112,34 +143,13 @@ def dashboard(request):
     visitor = Visitor.objects.all()
     context.__setitem__('newss', news)
     context.__setitem__('visitors', visitor)
+    if request.method == 'POST':
+        print('hi')
+        com = Complain(name=request.POST['name'], complain=request.POST['complain'], type='complain')
+        com.save()
+        context.__setitem__('complain', 'Feedback submited')
+        return render(request, 'dashboard.html', context=context)
     return render(request, 'dashboard.html', context=context)
-
-
-def resetpassword(request):
-    if request.method == "POST":
-        email = request.POST.get('email')
-        try:
-            User.objects.get(email=email)
-            email_message(email, 'Reset Link', 'http://127.0.0.1:9981/setpassword')
-            error = 'Please Check You Email'
-            return render(request, 'reset.html', {'error': error})
-        except User.DoesNotExist:
-            error = 'Please enter valid email Thank You'
-            return render(request, 'reset.html', {'error': error})
-    return render(request, 'reset.html')
-
-
-def setpassword(request):
-    if request.method == "POST":
-        email = request.POST.get('email')
-        try:
-            user = User.objects.get(email=email)
-            user.set_password(request.POST.get('password'))
-            return redirect('societyapp:login')
-        except User.DoesNotExist:
-            error = 'User Does Not Exist Please enter valid email Thank You'
-            return render(request, 'setpassword.html', {'error': error})
-    return render(request, 'setpassword.html')
 
 
 def logout(request):
@@ -186,7 +196,7 @@ def reslist(request):
     user = User.objects.all()
     return render(request, 'resident_list.html', {'users': user})
 
-
+@requires_csrf_token
 def buy_rent(request):
     if request.method == 'POST':
         types = request.POST.get('type')
@@ -197,9 +207,11 @@ def buy_rent(request):
         name = request.POST.get('name')
         mobile = request.POST.get('mobile')
         email = request.POST.get('email')
-        member = request.POST.get('member')
-        amount = request.POST.get('amnt')
+        member = request.POST.get('members')
+        amount_house = request.POST.get('amnt').split(':')
+        amount = amount_house[0]
         bank = request.POST.get('bank')
+        house_type = amount_house[1]
         if bank is None:
             bank = 'Cash'
         furnish = request.POST.get('furnished')
@@ -209,13 +221,25 @@ def buy_rent(request):
         if request.POST.get('fac1'):
             fac = fac + ' ' + request.POST.get('fac1')
         if request.POST.get('fac2'):
-            fac = fac + ' ' + request.POST.get('fac2')
+            fac = fac + ' , ' + request.POST.get('fac2')
         if request.POST.get('fac3'):
-            fac = fac + ' ' + request.POST.get('fac3')
+            fac = fac + ' , ' + request.POST.get('fac3')
         message = request.POST.get('message')
+        print(fac)
         buy = Buy(name=name, mobile=mobile, type=type, amount=amount, members=member, message=message, furnish=furnish,
-                  bank=bank, email=email)
-        message = "Someone will contact you soon"
-        print(message)
-        render(request, 'rent_buy.html', {'message': message})
-    return render(request, 'rent_buy.html')
+                  bank=bank, email=email, facilities=fac, house_type=house_type)
+        buy.save()
+        messages = "Someone will contact you soon"
+        print(messages)
+        return render(request, 'rent_buy.html', {'messages': messages})
+    messages = "Someone will contact you soon"
+    return render(request, 'rent_buy.html', {'massages': messages})
+
+@requires_csrf_token
+def rent_buy_board(request):
+    obj = Buy.objects.all()
+    return render(request, 'buy_rent_board.html', {'objects': obj})
+
+
+def under_main(request):
+    return render(request, 'under_maintance.html')

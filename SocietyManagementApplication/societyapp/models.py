@@ -16,7 +16,7 @@ class OTPLog(models.Model):
 
 class User(AbstractUser):
     username = None
-    email = models.EmailField(('email address'), unique=True)
+    email = models.EmailField(('email'), unique=True)
     first_name = models.TextField()
     last_name = models.TextField()
     mobile_no = models.IntegerField(default=0)
@@ -40,11 +40,17 @@ class News(models.Model):
     date = models.DateTimeField()
     containt = models.TextField()
 
+    def __str__(self):
+        return self.title
+
 
 class Complain(models.Model):
     name = models.TextField()
     complain = models.TextField()
     type = models.TextField()
+
+    def __str__(self):
+        return self.name
 
 
 class Visitor(models.Model):
@@ -53,16 +59,22 @@ class Visitor(models.Model):
     gender = models.TextField(default='Male')
     message = models.TextField()
 
+    def __str__(self):
+        return self.name
+
 
 class Buy(models.Model):
     name = models.TextField()
     mobile = models.TextField()
     type = models.TextField()
-    amount=models.TextField()
-    members=models.TextField()
-    email=models.EmailField()
-    house_type=models.TextField()
-    facilities=models.TextField()
-    message=models.TextField()
-    furnish=models.TextField()
-    bank=models.TextField()
+    amount = models.TextField()
+    members = models.TextField()
+    email = models.EmailField()
+    house_type = models.TextField()
+    facilities = models.TextField()
+    message = models.TextField()
+    furnish = models.TextField()
+    bank = models.TextField()
+
+    def __str__(self):
+        return self.name
